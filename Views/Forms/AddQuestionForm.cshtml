@@ -1,0 +1,268 @@
+﻿@model QuizeManagement_Project.Models.AddQuestionModel;
+
+<main id="main" class="main">
+    <section class="section">
+        <div class="row justify-content-center">
+            <!-- Increased width by adjusting column class to col-lg-10 and col-xl-8 -->
+            <div class="col-lg-10 col-xl-8 form-container">
+
+                <!-- Add Question Card -->
+                <div class="card border-0 shadow-lg rounded-4">
+                    <div class="card-body p-4 p-md-5">
+                        <!-- Header Section -->
+                        <div class="text-center mb-5">
+                            <div class="icon-shape bg-primary-light text-primary rounded-circle p-3 mb-3">
+                                @if (Model?.QuestionID > 0)
+                                {
+                                    <i class="fas fa-edit fa-2x"></i>
+                                }
+                                else
+                                {
+                                    <i class="fas fa-question-circle fa-2x"></i>
+                                }
+                            </div>
+                            @if (Model?.QuestionID > 0)
+                            {
+                                <h3 class="h2 text-primary mb-2">Edit Question</h3>
+                                <p class="text-muted">Modify the details of the question</p>
+                            }
+                            else
+                            {
+                                <h3 class="h2 text-primary mb-2">Create New Question</h3>
+                                <p class="text-muted">Fill in all fields to add a new question</p>
+                            }
+                        </div>
+
+                        <!-- Question Form -->
+                        <form method="post" class="row g-4 needs-validation" novalidate>
+                            @if (Model?.QuestionID > 0)
+                            {
+                                <input type="hidden" asp-for="QuestionID" value="@Model?.QuestionID" />
+                                <input type="hidden" asp-for="UserID" value="@Model?.UserID" />
+                            }
+                            <!-- Question Text -->
+                            <div class="col-12">
+                                <label class="form-label fw-bold text-dark">Question Text</label>
+                                <div class="input-group border rounded-3 bg-light">
+                                    <span class="input-group-text bg-transparent border-0">
+                                        <i class="fas fa-paragraph text-primary"></i>
+                                    </span>
+                                    <textarea asp-for="QuestionText"
+                                              class="form-control border-0 bg-light py-2"
+                                              placeholder="Type your question here..."
+                                              rows="3"
+                                              required></textarea>
+                                </div>
+                                <span asp-validation-for="QuestionText" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Options Grid -->
+                            <div class="col-12">
+                                <div class="row g-3">
+                                    <!-- Option A -->
+                                    <div class="col-12 col-md-6">
+                                        <div class="input-group border rounded-3 bg-light">
+                                            <span class="input-group-text bg-success text-white border-0">
+                                                <i class="fas fa-circle-a"></i>
+                                            </span>
+                                            <input asp-for="OptionA"
+                                                   class="form-control border-0 bg-light py-2"
+                                                   placeholder="Option A"
+                                                   required>
+                                        </div>
+                                        <span asp-validation-for="OptionA" class="text-danger small"></span>
+                                    </div>
+
+                                    <!-- Option B -->
+                                    <div class="col-12 col-md-6">
+                                        <div class="input-group border rounded-3 bg-light">
+                                            <span class="input-group-text bg-danger text-white border-0">
+                                                <i class="fas fa-circle-b"></i>
+                                            </span>
+                                            <input asp-for="OptionB"
+                                                   class="form-control border-0 bg-light py-2"
+                                                   placeholder="Option B"
+                                                   required>
+                                        </div>
+                                        <span asp-validation-for="OptionB" class="text-danger small"></span>
+                                    </div>
+
+                                    <!-- Option C -->
+                                    <div class="col-12 col-md-6">
+                                        <div class="input-group border rounded-3 bg-light">
+                                            <span class="input-group-text bg-warning text-dark border-0">
+                                                <i class="fas fa-circle-c"></i>
+                                            </span>
+                                            <input asp-for="OptionC"
+                                                   class="form-control border-0 bg-light py-2"
+                                                   placeholder="Option C"
+                                                   required>
+                                        </div>
+                                        <span asp-validation-for="OptionC" class="text-danger small"></span>
+                                    </div>
+
+                                    <!-- Option D -->
+                                    <div class="col-12 col-md-6">
+                                        <div class="input-group border rounded-3 bg-light">
+                                            <span class="input-group-text bg-info text-white border-0">
+                                                <i class="fas fa-circle-d"></i>
+                                            </span>
+                                            <input asp-for="OptionD"
+                                                   class="form-control border-0 bg-light py-2"
+                                                   placeholder="Option D"
+                                                   required>
+                                        </div>
+                                        <span asp-validation-for="OptionD" class="text-danger small"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Settings Section -->
+                            <div class="col-12">
+                                <div class="row g-3">
+                                    <!-- Correct Answer -->
+                                    <div class="col-12 col-md-6">
+                                        <label class="form-label fw-bold text-dark">Correct Answer</label>
+                                        <div class="input-group border rounded-3 bg-light">
+                                            <span class="input-group-text bg-transparent border-0">
+                                                <i class="fas fa-check-circle text-success"></i>
+                                            </span>
+                                            <select asp-for="CorrectOption"
+                                                    class="form-select border-0 bg-light py-2"
+                                                    required>
+                                                <option value="" disabled selected>Select correct option</option>
+                                                <option value="A" class="text-success">Option A</option>
+                                                <option value="B" class="text-danger">Option B</option>
+                                                <option value="C" class="text-warning">Option C</option>
+                                                <option value="D" class="text-info">Option D</option>
+                                            </select>
+                                        </div>
+                                        <span asp-validation-for="CorrectOption" class="text-danger small"></span>
+                                    </div>
+
+                                    <!-- Question Marks -->
+                                    <div class="col-12 col-md-6">
+                                        <label class="form-label fw-bold text-dark">Question Marks</label>
+                                        <div class="input-group border rounded-3 bg-light">
+                                            <span class="input-group-text bg-transparent border-0">
+                                                <i class="fas fa-star text-warning"></i>
+                                            </span>
+                                            <input asp-for="QuestionMarks"
+                                                   type="number"
+                                                   class="form-control border-0 bg-light py-2"
+                                                   placeholder="Marks"
+                                                   min="1"
+                                                   required>
+                                        </div>
+                                        <span asp-validation-for="QuestionMarks" class="text-danger small"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Question Level -->
+                            <div class="col-12">
+                                <label class="form-label fw-bold text-dark">Question Level</label>
+                                <div class="input-group border rounded-3 bg-light">
+                                    <span class="input-group-text bg-transparent border-0">
+                                        <i class="fas fa-chart-bar text-primary"></i>
+                                    </span>
+                                    <select asp-for="QuestionLevelID"
+                                            class="form-select border-0 bg-light py-2"
+                                            required>
+                                        <option value="" disabled selected>Select difficulty level</option>
+                                        @foreach (var level in ViewBag.QuestionLevelsList)
+                                        {
+                                            <option value="@level.QuestionLevelID" class="@level.ColorClass">@level.QuestionLevel</option>
+                                        }
+                                    </select>
+                                </div>
+                                <span asp-validation-for="QuestionLevelID" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Active Toggle -->
+                            <div class="col-12">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="isActive" asp-for="IsActive">
+                                    <label class="form-check-label fw-bold text-dark" style="margin-left: 5px; margin-top: 3px" for="isActive">
+                                        Active Question
+                                    </label>
+                                </div>
+                            </div>
+
+
+                            <!-- Form Actions -->
+                            <div class="col-12 mt-4 d-flex gap-3 justify-content-between">
+                                <button type="submit" asp-controller="Forms" asp-action="AddQuestionAddEdit"
+                                        class="btn btn-primary btn-lg rounded-pill fw-bold py-2"
+                                        style="font-size: 0.875rem; width: 48%;">
+                                    <i class="fas fa-cloud-upload-alt me-2"></i>
+                                    @if (Model?.QuestionID > 0)
+                                    {
+                                        <span>Update Question</span>
+                                    }
+                                    else
+                                    {
+                                        <span>Save & Continue</span>
+                                    }
+                                </button>
+                                <a href="../Tables/QuestionList"
+                                   class="btn btn-outline-danger btn-lg rounded-pill fw-bold py-2"
+                                   style="font-size: 0.875rem; width: 48%;">
+                                    <i class="bi bi-trash me-2"></i>
+                                    Cancel Adding
+                                </a>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</main>
+
+<style>
+    /* Custom width for the form container */
+    .form-container {
+        max-width: 90%; /* Or use a specific pixel value like 800px */
+        margin: 0 auto; /* Center the form horizontally */
+    }
+
+    .icon-shape {
+        width: 60px;
+        height: 60px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .rounded-4 {
+        border-radius: 1.5rem !important;
+    }
+
+    .form-switch .form-check-input {
+        width: 3em;
+        height: 1.5em;
+        margin-left: -0.5em;
+    }
+
+    .input-group-text {
+        transition: all 0.3s ease;
+        min-width: 45px;
+        justify-content: center;
+    }
+
+    .form-control:focus, .form-select:focus {
+        box-shadow: none;
+        background-color: #f8f9fa;
+    }
+
+    .hover-lift {
+        transition: all 0.2s ease;
+    }
+
+        .hover-lift:hover {
+            transform: translateY(-2px);
+        }
+</style>

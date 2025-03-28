@@ -1,0 +1,139 @@
+﻿@model QuizeManagement_Project.Models.AddQuestionLevelModel;
+
+<main id="main" class="main">
+    <section class="section">
+        <div class="row justify-content-center min-vh-100 d-flex align-items-center">
+            <!-- Adjust column width for larger form width -->
+            <div class="col-lg-8 col-xl-7">
+                <!-- Question Level Card -->
+                <div class="card border-0 shadow-lg rounded-4">
+                    <div class="card-body p-4 p-sm-5">
+                        <!-- Header Section -->
+                        <div class="text-center mb-5">
+                            <div class="icon-shape bg-primary-light text-primary rounded-circle p-3 mb-3">
+                                @if (Model?.QuestionLevelID > 0)
+                                {
+                                    <i class="fas fa-edit fa-2x"></i>
+                                }
+                                else
+                                {
+                                    <i class="fas fa-layer-group fa-2x"></i>
+                                }
+                            </div>
+                            @if (Model?.QuestionLevelID > 0)
+                            {
+                                <h3 class="h2 text-primary mb-2">Edit Difficulty Level</h3>
+                                <p class="text-muted">Modify existing question complexity level</p>
+                            }
+                            else
+                            {
+                                <h3 class="h2 text-primary mb-2">Create Difficulty Level</h3>
+                                <p class="text-muted">Define new question complexity level</p>
+                            }
+                        </div>
+
+                        <!-- Level Form -->
+                        <form method="post" asp-controller="Forms" asp-action="AddQuestionLevelAddEdit" class="row g-4 needs-validation" novalidate>
+                            @if (Model?.QuestionLevelID > 0)
+                            {
+                                <input type="hidden" asp-for="QuestionLevelID" value="@Model?.QuestionLevelID" />
+                                <input type="hidden" asp-for="UserID" value="@Model?.UserID" />
+                            }
+                            <!-- Difficulty Level -->
+                            <div class="col-12">
+                                <label class="form-label fw-bold text-dark">Difficulty</label>
+                                <div class="input-group border rounded-3 bg-light">
+                                    <span class="input-group-text bg-transparent border-0">
+                                        <i class="fas fa-chart-line text-primary"></i>
+                                    </span>
+                                    <input asp-for="QuestionLevel"
+                                           type="text"
+                                           class="form-control border-0 bg-light py-2"
+                                           placeholder="Enter Difficulty level"
+                                           required
+                                           style="text-transform: lowercase;">
+                                </div>
+                                <span asp-validation-for="QuestionLevel" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Temp userid Field -->
+                            @* <div class="col-12">
+                                <label class="form-label fw-bold text-dark">User ID</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-primary-light border-0">
+                                        <i class="fas fa-id-card text-primary"></i>
+                                    </span>
+                                    <input type="text"
+                                           class="form-control rounded-2 py-2"
+                                           placeholder="Enter User ID"
+                                           asp-for="UserID"
+                                           required>
+                                </div>
+                                <span class="text-danger small"></span>
+                            </div> *@
+
+                            <!-- Form Actions -->
+                            <div class="col-12 mt-4 d-grid gap-2">
+                                <button type="submit"
+                                        class="btn btn-primary btn-lg rounded-pill fw-bold py-2">
+                                    <i class="fas fa-save me-2"></i>
+                                    @if (Model?.QuestionLevelID > 0)
+                                    {
+                                        <span>Update Level</span>
+                                    }
+                                    else
+                                    {
+                                        <span>Save Level</span>
+                                    }
+                                </button>
+                                <a href="../Tables/QuestionLevelList"
+                                   class="btn btn-outline-danger btn-lg rounded-pill fw-bold py-2">
+                                    <i class="fas fa-times-circle me-2"></i>
+                                    Cancel
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</main>
+
+<style>
+    .icon-shape {
+        width: 60px;
+        height: 60px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .rounded-4 {
+        border-radius: 1.5rem !important;
+    }
+
+    .input-group-text {
+        transition: all 0.3s ease;
+        min-width: 45px;
+        justify-content: center;
+    }
+
+    .form-control:focus, .form-select:focus {
+        box-shadow: none;
+        background-color: #f8f9fa;
+    }
+
+    select option {
+        padding: 12px !important;
+    }
+
+    .form-select {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23646464' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 1rem center;
+        background-size: 16px 12px;
+    }
+
+</style>

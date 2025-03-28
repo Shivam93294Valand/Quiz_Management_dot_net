@@ -1,0 +1,184 @@
+﻿@model QuizeManagement_Project.Models.CreateAccountModel;
+
+@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+<main id="main">
+    <section class="section">
+        <div class="row justify-content-center min-vh-100 d-flex align-items-center">
+            <div class="col-12 col-md-10 col-lg-8 col-xl-6 d-flex flex-column align-items-center justify-content-center mx-auto">
+
+                <!-- Logo Section -->
+                <div class="d-flex align-items-center justify-content-between" style="margin-bottom: 40px; margin-left: 25px;">
+                    <a class="logo d-flex align-items-center">
+                        <img src="~/img/logo.png" alt="Logo">
+                        <span class="d-none d-lg-block" style="color:rgb(13, 110, 253)">Quiz Management</span>
+                    </a>
+                </div>
+                <!-- End Logo -->
+                <!-- Registration Card -->
+                <div class="card border-0 shadow-lg rounded-3 hover-transform">
+                    <div class="card-body p-4 p-sm-5">
+                        <div class="text-center mb-4">
+                            <h3 class="h2 text-primary mb-2">Create Account</h3>
+                            <p class="text-muted">Start your quiz management journey</p>
+                        </div>
+
+                        <!-- Registration Form -->
+                        <form asp-controller="Forms" asp-action="CreateAccountAddEdit" method="post" class="row g-3 needs-validation" novalidate>
+                            @Html.AntiForgeryToken()
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <!-- Username -->
+                            <div class="col-12">
+                                <label class="form-label fw-bold text-dark">Username</label>
+                                <div class="input-group border rounded-3 bg-light">
+                                    <span class="input-group-text icon-hover border-0">
+                                        <i class="fas fa-user text-primary"></i>
+                                    </span>
+                                    <input asp-for="userName" type="text" class="form-control border-0 bg-light py-2" placeholder="Enter username" required>
+                                </div>
+                                <span asp-validation-for="userName" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Password -->
+                            <div class="col-12">
+                                <label class="form-label fw-bold text-dark">Password</label>
+                                <div class="input-group border rounded-3 bg-light">
+                                    <span class="input-group-text icon-hover border-0">
+                                        <i class="fas fa-lock text-primary"></i>
+                                    </span>
+                                    <input asp-for="password" type="password" class="form-control border-0 bg-light py-2" placeholder="Create password" required>
+                                </div>
+                                <span asp-validation-for="password" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Mobile -->
+                            <div class="col-12">
+                                <label class="form-label fw-bold text-dark">Mobile</label>
+                                <div class="input-group border rounded-3 bg-light">
+                                    <span class="input-group-text icon-hover border-0">
+                                        <i class="fas fa-mobile-alt text-primary"></i>
+                                    </span>
+                                    <input asp-for="mobile" type="tel" class="form-control border-0 bg-light py-2" placeholder="+1 234 567 890" pattern="[+]?[0-9]{10,}" required>
+                                </div>
+                                <span asp-validation-for="mobile" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="col-12">
+                                <label class="form-label fw-bold text-dark">Email</label>
+                                <div class="input-group border rounded-3 bg-light">
+                                    <span class="input-group-text icon-hover border-0">
+                                        <i class="fas fa-envelope text-primary"></i>
+                                    </span>
+                                    <input asp-for="email" type="email" class="form-control border-0 bg-light py-2" placeholder="name@example.com" required>
+                                </div>
+                                <span asp-validation-for="email" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="col-12 mt-4">
+                                <button class="btn btn-primary btn-lg w-100 rounded-pill py-2 fw-bold hover-transform" type="submit">
+                                    <i class="fas fa-user-plus me-2"></i>Create Account
+                                </button>
+                            </div>
+
+                            <!-- Login Link -->
+                            <div class="col-12 text-center mt-3">
+                                <p class="mb-0 small">
+                                    Already registered?
+                                    <a href="/Forms/LoginAccountForm" class="text-primary fw-bold text-decoration-none hover-underline">
+                                        Sign in here
+                                    </a>
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</main>
+
+<style>
+    .card {
+        transition: transform 0.3s ease;
+    }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+    .input-group-text {
+        min-width: 45px;
+        justify-content: center;
+        transition: all 0.3s ease;
+    }
+    .icon-hover {
+        background: transparent;
+    }
+
+        .icon-hover:hover i {
+            color: #0d6efd;
+        }
+
+    .form-control {
+        transition: all 0.3s ease;
+    }
+
+        .form-control:focus {
+            box-shadow: none;
+            background-color: #f8f9fa;
+            border-color: #0d6efd;
+        }
+
+    .rounded-3 {
+        border-radius: 1rem !important;
+    }
+
+    form {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .input-group, .form-control {
+        width: 100%;
+    }
+
+    .hover-transform {
+        transition: transform 0.3s ease;
+    }
+
+        .hover-transform:hover {
+            transform: translateY(-2px);
+        }
+
+    .hover-underline {
+        position: relative;
+        transition: color 0.3s ease;
+    }
+
+        .hover-underline::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background: #0d6efd;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .hover-underline:hover::after {
+            transform: scaleX(1);
+        }
+
+    .text-danger.small {
+        display: block;
+        margin-top: 0.25rem;
+        font-size: 0.85rem;
+    }
+</style>

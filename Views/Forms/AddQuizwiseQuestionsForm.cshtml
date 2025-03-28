@@ -1,0 +1,145 @@
+﻿@model QuizeManagement_Project.Models.AddQuizwiseQuestionModel;
+
+<main id="main" class="main">
+    <section class="section">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-xl-6">
+
+                <!-- Add Quiz Questions Card -->
+                <div class="card border-0 shadow-lg rounded-4">
+                    <div class="card-body p-4 p-sm-5">
+                        <!-- Header Section -->
+                        <div class="text-center mb-5">
+                            <div class="icon-shape bg-primary-light text-primary rounded-circle p-3 mb-3">
+                                @if (Model?.QuizWiseQuestionsID > 0)
+                                {
+                                    <i class="fas fa-edit fa-2x"></i>
+                                }
+                                else
+                                {
+                                    <i class="fas fa-link fa-2x"></i>
+                                }
+                            </div>
+                            @if (Model?.QuizWiseQuestionsID > 0)
+                            {
+                                <h3 class="h2 text-primary mb-2">Edit Linked Question</h3>
+                                <p class="text-muted">Modify the association of question with a quiz</p>
+                            }
+                            else
+                            {
+                                <h3 class="h2 text-primary mb-2">Link Questions to Quiz</h3>
+                                <p class="text-muted">Associate questions with specific quizzes</p>
+                            }
+                        </div>
+
+                        <!-- Form Section -->
+                        <form method="post" asp-controller="Forms" asp-action="AddQuizwiseQuestionsAddEdit" class="row g-4 needs-validation" novalidate>
+                            @if (Model?.QuizWiseQuestionsID > 0)
+                            {
+                                <input type="hidden" asp-for="QuizWiseQuestionsID" value="@Model?.QuizWiseQuestionsID" />
+
+                                <input type="hidden" asp-for="UserID" value="@Model?.UserID" />
+                            }
+                            <!-- Quiz Selection -->
+                            <div class="col-12">
+                                <label class="form-label fw-bold text-dark">Select Quiz</label>
+                                <div class="input-group border rounded-3 bg-light">
+                                    <span class="input-group-text bg-transparent border-0">
+                                        <i class="fas fa-clipboard-list text-primary"></i>
+                                    </span>
+                                    <select asp-for="QuizID"
+                                            class="form-select border-0 bg-light py-2"
+                                            asp-items="@(new SelectList(ViewBag.QuizzesList, "QuizID", "QuizName"))"
+                                            required>
+                                        <option value="" disabled selected>Choose a quiz...</option>
+                                    </select>
+                                </div>
+                                <span asp-validation-for="QuizID" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Question Selection -->
+                            <div class="col-12">
+                                <label class="form-label fw-bold text-dark">Select Question</label>
+                                <div class="input-group border rounded-3 bg-light">
+                                    <span class="input-group-text bg-transparent border-0">
+                                        <i class="fas fa-question text-primary"></i>
+                                    </span>
+                                    <select asp-for="QuestionID"
+                                            class="form-select border-0 bg-light py-2"
+                                            asp-items="@(new SelectList(ViewBag.QuestionsList, "QuestionID", "QuestionText"))"
+                                            required>
+                                        <option value="" disabled selected>Choose a question...</option>
+                                    </select>
+                                </div>
+                                <span asp-validation-for="QuestionID" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Form Actions -->
+                            <div class="col-12 mt-4 d-grid gap-2">
+                                <button type="submit"
+                                        class="btn btn-primary btn-lg rounded-pill fw-bold py-2">
+                                    <i class="fas fa-link me-2"></i>
+                                    @if (Model?.QuizWiseQuestionsID > 0)
+                                    {
+                                        <span>Update Link</span>
+                                    }
+                                    else
+                                    {
+                                        <span>Link Question</span>
+                                    }
+                                </button>
+                                <a href="../Tables/AddQuizwiseQuestionsList"
+                                   class="btn btn-outline-danger btn-lg rounded-pill fw-bold py-2">
+                                    <i class="fas fa-times-circle me-2"></i>
+                                    Cancel
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</main>
+
+<style>
+    .hover-shadow {
+        transition: all 0.2s ease;
+        cursor: pointer;
+    }
+
+        .hover-shadow:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+    .icon-shape {
+        width: 40px;
+        height: 40px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .rounded-3 {
+        border-radius: 1rem !important;
+    }
+
+    .text-truncate {
+        max-width: 300px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+</style>
+
+<script>
+    // Initialize Bootstrap tooltips
+    document.addEventListener('DOMContentLoaded', function() {
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    })
+</script>

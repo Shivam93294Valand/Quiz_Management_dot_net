@@ -1,0 +1,943 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Quiz Management System</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="~/img/favicon.png" rel="icon">
+    <link href="~/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Updated Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="~/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="~/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="~/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="~/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="~/vendor/simple-datatables/style.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="~/css/style.css" rel="stylesheet">
+
+    <!-- =======================================================
+    * Template Name: NiceAdmin
+    * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+    * Updated: Apr 20 2024 with Bootstrap v5.3.3
+    * Author: BootstrapMade.com
+    * License: https://bootstrapmade.com/license/
+    ======================================================== -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <!-- Updated Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Updated CSS Links -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/@@material-design-icons/font@latest/filled.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+
+    <!-- Add Glassmorphism Effect -->
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --text-color: #333;
+            --card-bg: #ffffff;
+            --sidebar-bg: linear-gradient(195deg, #ffffff 0%, #f8f9fc 100%);
+            --header-bg: rgba(255, 255, 255, 0.98);
+            --footer-bg: #f8fafc;
+            --border-color: #e2e8f0;
+            --input-bg: #ffffff;
+            --primary-color: #6366f1;
+            --secondary-color: #4f46e5;
+            --accent-color: #8b5cf6;
+            --gradient-primary: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+        }
+
+        .dark-theme {
+            --bg-color: #1a1c23;
+            --text-color: #f8fafc;
+            --card-bg: #2d3748;
+            --sidebar-bg: linear-gradient(195deg, #2d3748 0%, #1a202c 100%);
+            --header-bg: rgba(45, 55, 72, 0.98);
+            --footer-bg: #1a1c23;
+            --border-color: #4a5568;
+            --input-bg: #4a5568;
+            --primary-color: #818cf8;
+            --secondary-color: #6366f1;
+            --accent-color: #a78bfa;
+            --gradient-primary: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .sidebar {
+            background: var(--sidebar-bg);
+            box-shadow: 4px 0 30px rgba(0, 0, 0, 0.03);
+            width: 280px;
+        }
+
+        .sidebar-nav .nav-item {
+            position: relative;
+            margin: 4px 0;
+        }
+
+        .sidebar-nav .nav-link {
+            padding: 12px 20px;
+            margin: 2px 12px;
+            border-radius: 10px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            color: var(--text-color);
+        }
+
+            .sidebar-nav .nav-link i:first-child {
+                font-size: 1.2rem;
+                width: 30px;
+                color: #64748b;
+            }
+
+            .sidebar-nav .nav-link:hover {
+                background: rgba(99, 102, 241, 0.08);
+                color: var(--primary-color);
+            }
+
+            .sidebar-nav .nav-link.active {
+                background: var(--primary-color);
+                color: white;
+                box-shadow: 0 4px 16px rgba(99, 102, 241, 0.25);
+            }
+
+        .sub-menu {
+            padding-left: 24px;
+        }
+
+            .sub-menu .nav-link {
+                padding: 10px 20px;
+                margin: 2px 0;
+                border-radius: 8px;
+                font-size: 0.95rem;
+                color: var(--text-color);
+            }
+
+                .sub-menu .nav-link:hover {
+                    background: rgba(99, 102, 241, 0.05);
+                    transform: translateX(4px);
+                }
+
+        .toggle-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .collapsed .toggle-icon {
+            transform: rotate(-90deg);
+        }
+
+        .collapse {
+            transition: all 0.3s ease-out;
+        }
+
+        .collapsing {
+            transition: height 0.25s ease;
+        }
+
+        .sidebar-nav .nav-link.active::after {
+            content: '';
+            position: absolute;
+            right: -12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 60%;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        @@keyframes slideIn {
+            from {
+                transform: translateY(-50%) scaleY(0);
+            }
+
+            to {
+                transform: translateY(-50%) scaleY(1);
+            }
+        }
+
+        .header {
+            background: var(--header-bg);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .nav-profile img {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .nav-profile:hover img {
+            transform: scale(1.1);
+            border-color: var(--primary-color);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
+        }
+
+        .dropdown-menu {
+            background: var(--card-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            margin-top: 12px;
+        }
+
+        .dropdown-item {
+            color: var(--text-color);
+            transition: all 0.2s ease;
+        }
+
+        .card {
+            background: var(--card-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .card-header {
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            font-weight: 600;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary {
+            background-image: var(--gradient-primary);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .btn-primary:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+            }
+
+
+        @@keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container-fluid {
+            animation: fadeIn 0.6s ease;
+        }
+
+        .table-hover tbody tr {
+            transition: all 0.2s ease;
+        }
+
+            .table-hover tbody tr:hover {
+                background: rgba(99, 102, 241, 0.05);
+                transform: translateX(8px);
+            }
+
+        .form-label {
+            color: var(--text-color);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control {
+            background: var(--input-bg);
+            color: var(--text-color);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 12px 16px;
+            transition: all 0.3s ease;
+        }
+
+            .form-control:focus {
+                border-color: var(--primary-color);
+                box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+            }
+
+        .form-select {
+            background: var(--input-bg) url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='%2364768b' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e") no-repeat right 0.75rem center/16px 12px;
+            color: var(--text-color);
+        }
+
+        .dark-theme .form-select {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='%23cbd5e1' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+        }
+
+
+        .avatar-container {
+            position: relative;
+        }
+
+        .online-status {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 12px;
+            height: 12px;
+            background: #22c55e;
+            border: 2px solid white;
+            border-radius: 50%;
+        }
+
+        .footer {
+            background-color: var(--footer-bg);
+        }
+
+        .table {
+            --bs-table-bg: var(--card-bg);
+            --bs-table-striped-bg: rgba(0, 0, 0, 0.03);
+            --bs-table-hover-bg: rgba(99, 102, 241, 0.05);
+            --bs-table-color: var(--text-color);
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border-color: var(--border-color);
+        }
+
+        .dark-theme .table {
+            --bs-table-striped-bg: rgba(255, 255, 255, 0.03);
+            --bs-table-hover-bg: rgba(99, 102, 241, 0.1);
+        }
+
+
+        .table thead th {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .table tbody td {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: var(--bs-table-striped-bg);
+        }
+
+        .dark-theme .table-striped tbody tr:nth-of-type(odd) {
+            background-color: var(--bs-table-striped-bg);
+        }
+
+        .theme-toggle-wrapper {
+            position: relative;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        #theme-toggle {
+            transition: all 0.3s ease;
+            transform: scale(1);
+        }
+
+
+        .dark-theme #theme-toggle {
+            color: #ffd700;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--card-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 4px;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 2rem;
+            height: 2rem;
+            border: 0.25em solid currentColor;
+            border-right-color: transparent;
+            border-radius: 50%;
+            animation: spinner-rotate 0.75s linear infinite;
+        }
+
+        @@keyframes spinner-rotate {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+
+</head>
+<body>
+    <!-- ======= Header ======= -->
+    <header id="header" class="header fixed-top d-flex align-items-center">
+
+        <div class="d-flex align-items-center justify-content-between">
+            <a asp-controller="Home" asp-action="Index" class="logo d-flex align-items-center">
+                <img src="~/img/logo.png" alt="Logo">
+                <span class="d-none d-lg-block" style="color:rgb(13, 110, 253)">Quiz Management</span>
+            </a>
+            <i class="bi bi-list toggle-sidebar-btn"></i>
+        </div>
+        <!-- End Logo -->
+
+
+        <nav class="header-nav ms-auto">
+            <ul class="d-flex align-items-center">
+
+                <li class="nav-item">
+                    <a class="nav-link nav-icon" href="#" id="theme-toggle">
+                        <i class="fas fa-moon"></i>
+                    </a>
+                </li>
+                <!-- Theme Toggle Button -->
+
+                <li class="nav-item dropdown">
+
+                    <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+                        <i class="bi bi-bell"></i>
+                        <span class="badge bg-primary badge-number">4</span>
+                    </a>
+                    <!-- End Notification Icon -->
+
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+                        <li class="dropdown-header">
+                            You have 4 new notifications
+                            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="notification-item">
+                            <i class="bi bi-exclamation-circle text-warning"></i>
+                            <div>
+                                <h4>Lorem Ipsum</h4>
+                                <p>Quae dolorem earum veritatis oditseno</p>
+                                <p>30 min. ago</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="notification-item">
+                            <i class="bi bi-x-circle text-danger"></i>
+                            <div>
+                                <h4>Atque rerum nesciunt</h4>
+                                <p>Quae dolorem earum veritatis oditseno</p>
+                                <p>1 hr. ago</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="notification-item">
+                            <i class="bi bi-check-circle text-success"></i>
+                            <div>
+                                <h4>Sit rerum fuga</h4>
+                                <p>Quae dolorem earum veritatis oditseno</p>
+                                <p>2 hrs. ago</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="notification-item">
+                            <i class="bi bi-info-circle text-primary"></i>
+                            <div>
+                                <h4>Dicta reprehenderit</h4>
+                                <p>Quae dolorem earum veritatis oditseno</p>
+                                <p>4 hrs. ago</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li class="dropdown-footer">
+                            <a href="#">Show all notifications</a>
+                        </li>
+
+                    </ul>
+                    <!-- End Notification Dropdown Items -->
+
+                </li>
+                <!-- End Notification Nav -->
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+                        <i class="bi bi-chat-left-text"></i>
+                        <span class="badge bg-success badge-number">3</span>
+                    </a>
+                    <!-- End Messages Icon -->
+
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
+                        <li class="dropdown-header">
+                            You have 3 new messages
+                            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="message-item">
+                            <a href="#">
+                                <img src="~/img/messages-1.jpg" alt="" class="rounded-circle">
+                                <div>
+                                    <h4>Maria Hudson</h4>
+                                    <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                                    <p>4 hrs. ago</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="message-item">
+                            <a href="#">
+                                <img src="~/img/messages-2.jpg" alt="" class="rounded-circle">
+                                <div>
+                                    <h4>Anna Nelson</h4>
+                                    <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                                    <p>6 hrs. ago</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="message-item">
+                            <a href="#">
+                                <img src="~/img/messages-3.jpg" alt="" class="rounded-circle">
+                                <div>
+                                    <h4>David Muldon</h4>
+                                    <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                                    <p>8 hrs. ago</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="dropdown-footer">
+                            <a href="#">Show all messages</a>
+                        </li>
+
+                    </ul>
+                    <!-- End Messages Dropdown Items -->
+
+                </li>
+                <!-- End Messages Nav -->
+
+                <li class="nav-item dropdown pe-3">
+                    <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                        <div class="avatar-container">
+                            <img src="~/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+                            <div class="online-status"></div>
+                        </div>
+                        <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+                    </a>
+                    <!-- End Profile Iamge Icon -->
+
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                        <li class="dropdown-header">
+                            <h6>Kevin Anderson</h6>
+                            <span>Web Designer</span>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                                <i class="bi bi-person"></i>
+                                <span>My Profile</span>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                                <i class="bi bi-gear"></i>
+                                <span>Account Settings</span>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
+                                <i class="bi bi-question-circle"></i>
+                                <span>Need Help?</span>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" asp-controller="Forms" asp-action="Logout">
+                                <i class="bi bi-box-arrow-right"></i>
+                                <span>Sign Out</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                    <!-- End Profile Dropdown Items -->
+                </li>
+                <!-- End Profile Nav -->
+            </ul>
+        </nav>
+        <!-- End Icons Navigation -->
+
+    </header>
+    <!-- End Header -->
+    <!-- ======= Sidebar ======= -->
+    <aside id="sidebar" class="sidebar">
+        <ul class="sidebar-nav" id="sidebar-nav">
+            <!-- Dashboard Item -->
+            <li class="nav-item">
+                <a class="nav-link active" href="../Home/Index">
+                    <i class="las la-chart-bar"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+
+            <!-- Quiz Management -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-toggle="collapse" href="#quiz-nav">
+                    <i class="las la-puzzle-piece"></i>
+                    <span>Quiz</span>
+                    <i class="las la-angle-down ms-auto toggle-icon"></i>
+                </a>
+                <div id="quiz-nav" class="collapse" data-bs-parent="#sidebar-nav">
+                    <div class="sub-menu">
+                        <a class="nav-link" asp-controller="Forms" asp-action="CreateQuizForm">
+                            <i class="las la-plus-circle"></i>
+                            <span>New Quiz</span>
+                        </a>
+                        <a class="nav-link" asp-controller="Tables" asp-action="QuizList">
+                            <i class="las la-list-alt"></i>
+                            <span>Quiz List</span>
+                        </a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Add/Edit Questions -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-toggle="collapse" href="#question-nav">
+                    <i class="las la-question-circle"></i>
+                    <span>Questions</span>
+                    <i class="las la-angle-down ms-auto"></i>
+                </a>
+                <div id="question-nav" class="collapse">
+                    <div class="sub-menu">
+                        <a class="nav-link" asp-controller="Forms" asp-action="AddQuestionForm">
+                            <i class="las la-plus"></i>
+                            <span>New Question</span>
+                        </a>
+                        <a class="nav-link" asp-controller="Tables" asp-action="QuestionList">
+                            <i class="las la-table"></i>
+                            <span>Question List</span>
+                        </a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Difficulty Levels -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-toggle="collapse" href="#level-nav">
+                    <i class="las la-signal"></i>
+                    <span>Difficulty Levels</span>
+                    <i class="las la-angle-down ms-auto"></i>
+                </a>
+                <div id="level-nav" class="collapse">
+                    <div class="sub-menu">
+                        <a class="nav-link" asp-controller="Forms" asp-action="AddQuestionLevelForm">
+                            <i class="las la-plus"></i>
+                            <span>New Level</span>
+                        </a>
+                        <a class="nav-link" asp-controller="Tables" asp-action="QuestionLevelList">
+                            <i class="las la-stream"></i>
+                            <span>Level List</span>
+                        </a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Quiz Linking -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-toggle="collapse" href="#quizwise-nav">
+                    <i class="las la-link"></i>
+                    <span>Question Linking</span>
+                    <i class="las la-angle-down ms-auto"></i>
+                </a>
+                <div id="quizwise-nav" class="collapse">
+                    <div class="sub-menu">
+                        <a class="nav-link" asp-controller="Forms" asp-action="AddQuizwiseQuestionsForm">
+                            <i class="las la-plus"></i>
+                            <span>Link Questions</span>
+                        </a>
+                        <a class="nav-link" asp-controller="Tables" asp-action="AddQuizwiseQuestionsList">
+                            <i class="las la-project-diagram"></i>
+                            <span>Linked Questions List</span>
+                        </a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </aside>
+    <!-- End Sidebar-->
+
+    <div class="container-fluid">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer" class="footer">
+        <!-- Removed inline style and rely on CSS -->
+        <div class="copyright">
+            © Copyright <strong><span>Quiz Management</span></strong>. All Rights Reserved
+        </div>
+        <div class="credits">
+            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        </div>
+    </footer>
+    <!-- End Footer -->
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="~/vendor/apexcharts/apexcharts.min.js"></script>
+    <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/vendor/chart.js/chart.umd.js"></script>
+    <script src="~/vendor/echarts/echarts.min.js"></script>
+    <script src="~/vendor/quill/quill.js"></script>
+    <script src="~/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="~/vendor/tinymce/tinymce.min.js"></script>
+    <script src="~/vendor/php-email-form/validate.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="~/js/main.js"></script>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+    <!-- Updated JavaScript -->
+    <script>
+        // Add interactive sidebar toggle
+        document.querySelector('.toggle-sidebar-btn').addEventListener('click', () => {
+            document.querySelector('.sidebar').classList.toggle('active');
+        });
+
+        // Add hover effects
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                item.style.transform = 'translateX(4px)';
+            });
+            item.addEventListener('mouseleave', () => {
+                item.style.transform = 'translateX(0)';
+            });
+        });
+    </script>
+
+    <!-- Add Page Load Animation -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.classList.add('loaded');
+        });
+    </script>
+
+    <style>
+        body:not(.loaded) .container-fluid {
+            opacity: 0;
+        }
+    </style>
+
+    <!-- Add Interactive Chart Tooltips -->
+    <script>
+        // Add hover effects to charts
+        document.querySelectorAll('.chart-item').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                item.style.transform = 'scale(1.05)';
+            });
+            item.addEventListener('mouseleave', () => {
+                item.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+
+    <script>
+        // Enhanced Sidebar Interactions
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                link.style.transform = 'translateX(8px)';
+            });
+            link.addEventListener('mouseleave', () => {
+                link.style.transform = 'translateX(0)';
+            });
+        });
+
+        // Collapse Animation
+        document.querySelectorAll('[data-bs-toggle="collapse"]').forEach(button => {
+            button.addEventListener('click', () => {
+                const icon = button.querySelector('.la-angle-down');
+                icon.style.transform = icon.style.transform === 'rotate(180deg)' ?
+                    'rotate(0deg)' : 'rotate(180deg)';
+            });
+        });
+
+        // Hover Delay Effect
+        let hoverTimeout;
+        document.querySelectorAll('.nav-link').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                hoverTimeout = setTimeout(() => {
+                    item.style.transform = 'translateX(8px)';
+                }, 100);
+            });
+            item.addEventListener('mouseleave', () => {
+                clearTimeout(hoverTimeout);
+                item.style.transform = 'translateX(0)';
+            });
+        });
+
+                // Enhanced Sidebar Interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Collapse management
+            const collapses = document.querySelectorAll('.collapse');
+
+            collapses.forEach(collapse => {
+                collapse.addEventListener('show.bs.collapse', function() {
+                    const parent = this.closest('.nav-item');
+                    parent.querySelector('.toggle-icon').style.transform = 'rotate(0deg)';
+                });
+
+                collapse.addEventListener('hide.bs.collapse', function() {
+                    const parent = this.closest('.nav-item');
+                    parent.querySelector('.toggle-icon').style.transform = 'rotate(-90deg)';
+                });
+            });
+
+            // Auto-close other collapses
+            document.querySelectorAll('[data-bs-toggle="collapse"]').forEach(trigger => {
+                trigger.addEventListener('click', function() {
+                    const target = document.querySelector(this.getAttribute('href'));
+                    const parent = target.closest('.nav-item');
+
+                    document.querySelectorAll('.collapse').forEach(c => {
+                        if (c !== target && !parent.contains(c)) {
+                            const collapseInstance = bootstrap.Collapse.getInstance(c);
+                            if (collapseInstance && c.classList.contains('show')) {
+                                collapseInstance.hide();
+                            }
+                        }
+                    });
+                });
+            });
+
+            // Hover enhancements
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('mouseenter', function() {
+                    if (!this.classList.contains('active')) {
+                        this.style.transform = 'translateX(6px)';
+                    }
+                });
+                link.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateX(0)';
+                });
+            });
+        });
+    </script>
+
+    <script>
+        document.getElementById('theme-toggle').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.body.classList.toggle('dark-theme');
+            const icon = this.querySelector('i');
+            if (document.body.classList.contains('dark-theme')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // Apply saved theme on page load
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-theme');
+            const toggleIcon = document.querySelector('#theme-toggle i');
+            toggleIcon.classList.remove('fa-moon');
+            toggleIcon.classList.add('fa-sun');
+        }
+    </script>
+
+</body>
+</html>

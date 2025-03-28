@@ -1,0 +1,263 @@
+﻿<main id="main" class="main">
+    <div class="pagetitle">
+        <h1 class="text-primary">Quiz Management Dashboard</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item active">Dashboard</li>
+            </ol>
+        </nav>
+    </div>
+    <!-- End Page Title -->
+
+    <section class="section dashboard">
+        <div class="row">
+            <!-- Info Cards Section -->
+            <div class="col-12">
+                <div class="row gy-4">
+                    <!-- Total Quizzes Card -->
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="card info-card quizzes-card shadow-lg">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h5 class="card-title text-primary mb-0">Total Quizes</h5>
+                                        <span class="fs-2 fw-bold">145</span>
+                                    </div>
+                                    <div class="icon-circle bg-primary-light">
+                                        <i class="fas fa-list-ol text-primary fs-3"></i>
+                                    </div>
+                                </div>
+                                <div class="progress mt-3" style="height: 4px;">
+                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 75%"
+                                         aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Total Questions Card -->
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="card info-card questions-card shadow-lg">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h5 class="card-title text-success mb-0">Total Questions</h5>
+                                        <span class="fs-2 fw-bold">1,240</span>
+                                    </div>
+                                    <div class="icon-circle bg-success-light">
+                                        <i class="fas fa-question-circle text-success fs-3"></i>
+                                    </div>
+                                </div>
+                                <div class="progress mt-3" style="height: 4px;">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 60%"
+                                         aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Question Levels Card -->
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="card info-card levels-card shadow-lg">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h5 class="card-title text-warning mb-0">Question Levels</h5>
+                                        <span class="fs-2 fw-bold">3</span>
+                                    </div>
+                                    <div class="icon-circle bg-warning-light">
+                                        <i class="fas fa-layer-group text-warning fs-3"></i>
+                                    </div>
+                                </div>
+                                <div class="progress mt-3" style="height: 4px;">
+                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 85%"
+                                         aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Info Cards -->
+            <!-- Tables Section -->
+            <div class="col-12">
+                <div class="row gy-4">
+                    <!-- Recent Quizzes Table -->
+                    <div class="col-lg-6">
+                        <div class="card shadow-lg">
+                            <div class="card-body">
+                                <h5 class="card-title d-flex justify-content-between align-items-center">
+                                    Recent Quizzes
+                                    <span class="badge bg-primary text-white">Last 10</span>
+                                </h5>
+                                <div class="table-responsive">
+                                    <table class="table table-hover align-middle">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th scope="col">Quiz ID</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Questions</th>
+                                                <th scope="col">Date</th>
+                                                <th scope="col">Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="clickable-row">
+                                                <td><a href="#" class="text-primary">2</a></td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <i class="fas fa-calculator me-2 text-primary"></i>
+                                                        Advanced Mathematics
+                                                    </div>
+                                                </td>
+                                                <td>120</td>
+                                                <td>2025-02-05</td>
+                                                <td><span class="badge bg-success">Active</span></td>
+                                            </tr>
+                                            <tr class="clickable-row">
+                                                <td><a href="#" class="text-primary">1</a></td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <i class="fas fa-flask me-2 text-danger"></i>
+                                                        Chemistry Basics
+                                                    </div>
+                                                </td>
+                                                <td>89</td>
+                                                <td>2025-02-04</td>
+                                                <td><span class="badge bg-warning">Upcoming</span></td>
+                                            </tr>
+                                            <tr class="clickable-row">
+                                                <td><a href="#" class="text-primary">3</a></td>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <i class="fas fa-globe-asia me-2 text-success"></i>
+                                                        World History
+                                                    </div>
+                                                </td>
+                                                <td>256</td>
+                                                <td>2025-02-03</td>
+                                                <td><span class="badge bg-secondary">Archived</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Questions Table -->
+                    <div class="col-lg-6">
+                        <div class="card shadow-lg">
+                            <div class="card-body">
+                                <h5 class="card-title d-flex justify-content-between align-items-center">
+                                    Recent Questions
+                                    <span class="badge bg-primary text-white">Last 10</span>
+                                </h5>
+                                <div class="table-responsive">
+                                    <table class="table table-hover align-middle">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th scope="col">Question ID</th>
+                                                <th scope="col">Content</th>
+                                                <th scope="col">Marks</th>
+                                                <th scope="col">Level</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="clickable-row">
+                                                <td><a href="#" class="text-primary">2</a></td>
+                                                <td>What is 5 + 3?</td>
+                                                <td>
+                                                    <div class="star-rating text-warning">
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="far fa-star"></i>
+                                                        <i class="far fa-star"></i>
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge bg-info">Easy</span></td>
+                                            </tr>
+                                            <tr class="clickable-row">
+                                                <td><a href="#" class="text-primary">1</a></td>
+                                                <td>Who discovered gravity?</td>
+                                                <td>
+                                                    <div class="star-rating text-warning">
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="far fa-star"></i>
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge bg-warning">Medium</span></td>
+                                            </tr>
+                                            <tr class="clickable-row">
+                                                <td><a href="#" class="text-primary">3</a></td>
+                                                <td>What is the capital of France?</td>
+                                                <td>
+                                                    <div class="star-rating text-warning">
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="far fa-star"></i>
+                                                        <i class="far fa-star"></i>
+                                                        <i class="far fa-star"></i>
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge bg-danger">Hard</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<style>
+    .icon-circle {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .bg-primary-light {
+        background-color: #e3f2fd;
+    }
+
+    .bg-success-light {
+        background-color: #d1f5e9;
+    }
+
+    .bg-warning-light {
+        background-color: #fff3cd;
+    }
+
+    .clickable-row {
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+        .clickable-row:hover {
+            transform: translateX(5px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+    .star-rating i {
+        font-size: 0.9rem;
+        margin-right: 2px;
+    }
+
+    .card-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+    }
+</style>

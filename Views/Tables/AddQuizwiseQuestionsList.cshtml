@@ -1,0 +1,232 @@
+﻿@model DataTable
+@using System.Data
+
+<main id="main" class="main">
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <!-- Search Card -->
+                <div class="card border-0 shadow-sm rounded-3 mb-4">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="card-title mb-0 text-primary">Quiz Questions Search</h5>
+                            <a href="../Forms/AddQuizwiseQuestionsForm" class="btn btn-success btn-lg rounded-pill">
+                                <i class="fas fa-link me-2"></i>Link New Question
+                            </a>
+                        </div>
+
+                        <!-- Search Form -->
+                        <form class="row g-4 needs-validation" novalidate>
+                            <div class="col-12 col-md-6">
+                                <div class="input-group border rounded-3">
+                                    <span class="input-group-text bg-transparent border-0">
+                                        <i class="fas fa-clipboard-list text-muted"></i>
+                                    </span>
+                                    <input type="text"
+                                           class="form-control border-0 py-2"
+                                           id="searchQuizName"
+                                           placeholder="Search by quiz name...">
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <div class="input-group border rounded-3">
+                                    <span class="input-group-text bg-transparent border-0">
+                                        <i class="fas fa-question-circle text-muted"></i>
+                                    </span>
+                                    <input type="text"
+                                           class="form-control border-0 py-2"
+                                           id="searchQuestionName"
+                                           placeholder="Search by question...">
+                                </div>
+                            </div>
+
+                            <div class="col-12 d-flex justify-content-end gap-3">
+                                <button type="submit" class="btn btn-primary rounded-pill px-4">
+                                    <i class="fas fa-magnifying-glass me-2"></i>Search
+                                </button>
+                                <button type="reset" class="btn btn-outline-secondary rounded-pill px-4">
+                                    <i class="fas fa-rotate me-2"></i>Reset
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Quiz Questions Card -->
+                <div class="card border-0 shadow-sm rounded-3">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="card-title text-primary mb-0">Linked Questions Management</h5>
+                            <a asp-controller="Tables" asp-action="QuizwiseQuestionsExportToExcel" class="btn btn-success btn-lg rounded-pill">
+                                <i class="fas fa-file-excel me-2"></i>Export Data in Excel
+                            </a>
+                        </div>
+
+                        <!-- Responsive Table -->
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th class="py-3">ID</th>
+                                        <th class="py-3">Quiz</th>
+                                        <th class="py-3">Question</th>
+                                        <th class="py-3">Status</th>
+                                        <th class="py-3 text-end">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (DataRow dataRow in Model.Rows)
+                                    {
+                                        <tr class="hover-shadow">
+                                            <td class="fw-bold">@dataRow["QuizWiseQuestionsID"]</td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="icon-shape bg-primary text-white rounded-circle me-3">
+                                                        <i class="fas fa-book"></i>
+                                                    </div>
+                                                    <span class="text-truncate" style="max-width: 200px;">
+                                                        @dataRow["QuizName"]
+                                                    </span>
+                                                </div>
+                                            </td>
+                                            <td class="text-truncate" style="max-width: 300px;">
+                                                @dataRow["QuestionText"]
+                                            </td>
+                                            <td>
+                                                <span class="badge @(dataRow["QuestionIsActive"].ToString() == "True" ? "bg-success" : "bg-danger")">
+                                                    @(dataRow["QuestionIsActive"].ToString() == "True" ? "Active" : "Inactive")
+                                                </span>
+                                            </td>
+                                            <td class="text-end">
+                                                <div class="d-flex gap-2 justify-content-end">
+                                                    <a asp-controller="Forms"
+                                                       asp-action="EditQuizwiseQuestionsForm"
+                                                       asp-route-QuizWiseQuestionsID="@dataRow["QuizWiseQuestionsID"]"
+                                                       class="btn btn-outline-primary btn-sm rounded-pill"
+                                                       data-bs-toggle="tooltip"
+                                                       title="Edit Question From Quiz">
+                                                        <i class="fas fa-pen-to-square"></i>
+                                                    </a>
+                                                    <button type="button" class="btn btn-outline-danger btn-sm rounded-pill"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#deleteConfirmationModal"
+                                                            data-quiz-wise-question-id="@dataRow["QuizWiseQuestionsID"]"
+                                                            data-bs-toggle="tooltip"
+                                                            title="Delete Question From Quiz">
+                                                        <i class="fas fa-trash-can"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content rounded-3 shadow-sm border-0">
+                <div class="modal-header bg-light">
+                    <h5 class="modal-title text-danger" id="deleteConfirmationModalLabel">
+                        <i class="fas fa-exclamation-triangle me-2"></i>Confirm Delete
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete this Question link from the Quiz?</p>
+                    <p class="text-secondary small">This action cannot be undone.</p>
+                    <span class="text-danger">@TempData["ErrorMessage"]</span>
+                </div>
+                <div class="modal-footer bg-light">
+                    <form method="post" asp-controller="Tables" asp-action="QuizwiseQuestionsDelete">
+                        <input type="hidden" name="QuizWiseQuestionsID" id="deleteQuizWiseQuestionId" value="" />
+                        <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">
+                            <i class="fas fa-ban me-2"></i>Cancel
+                        </button>
+                        <button type="submit" class="btn btn-danger rounded-pill px-4">
+                            <i class="fas fa-trash-can me-2"></i>Delete Link
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Alert -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success fade show position-fixed bottom-0 end-0 m-3 shadow-sm rounded-pill" role="alert" id="successAlert">
+            <i class="fas fa-check-circle me-2"></i> @TempData["SuccessMessage"]
+            <button type="button" class="btn-close btn-sm float-end" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+</main>
+
+<style>
+    .hover-shadow {
+        transition: all 0.2s ease;
+        cursor: pointer;
+    }
+
+        .hover-shadow:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+    .icon-shape {
+        width: 40px;
+        height: 40px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .rounded-3 {
+        border-radius: 1rem !important;
+    }
+
+    .text-truncate {
+        max-width: 300px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        });
+
+        var deleteConfirmationModal = document.getElementById('deleteConfirmationModal');
+        deleteConfirmationModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget;
+            var quizWiseQuestionId = button.getAttribute('data-quiz-wise-question-id');
+            var deleteQuizWiseQuestionIdInput = deleteConfirmationModal.querySelector('#deleteQuizWiseQuestionId');
+            deleteQuizWiseQuestionIdInput.value = quizWiseQuestionId;
+        });
+
+        // Auto close success alert after 3 seconds
+        var successAlert = document.getElementById('successAlert');
+        if (successAlert) {
+            setTimeout(function() {
+                var bsAlert = new bootstrap.Alert(successAlert);
+                bsAlert.close();
+            }, 3000); // 3000 milliseconds = 3 seconds
+        }
+    })
+</script>

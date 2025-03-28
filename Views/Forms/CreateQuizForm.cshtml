@@ -1,0 +1,182 @@
+﻿@model QuizeManagement_Project.Models.CreateQuizModel;
+
+<main id="main">
+    <section class="section">
+        <div class="row justify-content-center min-vh-100 d-flex align-items-center">
+            <!-- Increased form width for larger screens -->
+            <div class="col-lg-8 col-md-10 col-xl-7">
+
+                <!-- Create Quiz Form Section -->
+                <div class="card border-0 shadow-lg rounded-3">
+                    <div class="card-body p-4 p-sm-5">
+                        <!-- Header Section -->
+                        <div class="text-center mb-4">
+                            <div class="icon-shape bg-primary-light text-primary rounded-circle p-3 mb-3">
+                                @if (Model?.QuizID > 0)
+                                {
+                                    <i class="fas fa-edit fa-2x"></i>
+                                }
+                                else
+                                {
+                                    <i class="fas fa-plus-circle fa-2x"></i>
+                                }
+                            </div>
+                            @if (Model?.QuizID > 0)
+                            {
+                                <h3 class="h2 text-primary mb-2">Edit Quiz</h3>
+                                <p class="text-muted">Modify the details for the selected Quiz</p>
+                            }
+                            else
+                            {
+                                <h3 class="h2 text-primary mb-2">Create New Quiz</h3>
+                                <p class="text-muted">Fill in the details to set up your new Quiz</p>
+                            }
+                        </div>
+
+                        <!-- Quiz Creation Form -->
+                        <form method="post" class="row g-3 needs-validation" asp-controller="Forms" asp-action="CreateQuizAddEdit">
+                            @if (Model?.QuizID > 0)
+                            {
+                                <input type="hidden" asp-for="QuizID" value="@Model?.QuizID" />
+                                <input type="hidden" asp-for="UserID" value="@Model?.UserID" />
+                            }
+                            <!-- Quiz Name Field -->
+                            <div class="col-12">
+                                <label for="QuizName" class="form-label fw-bold">Quiz Name</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-primary-light border-0">
+                                        <i class="fas fa-pencil-alt text-primary"></i>
+                                    </span>
+                                    <input type="text"
+                                           class="form-control rounded-2 py-2"
+                                           placeholder="Enter quiz name"
+                                           asp-for="QuizName"
+                                           value="@Model?.QuizName"
+                                           required>
+                                </div>
+                                <span asp-validation-for="QuizName" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Total Questions Field -->
+                            <div class="col-12">
+                                <label for="TotalQuestions" class="form-label fw-bold">Total Questions</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-primary-light border-0">
+                                        <i class="fas fa-list-ol text-primary"></i>
+                                    </span>
+                                    <input type="number"
+                                           class="form-control rounded-2 py-2"
+                                           placeholder="Number of questions"
+                                           asp-for="TotalQuestions"
+                                           value="@Model?.TotalQuestions"
+                                           min="1"
+                                           required>
+                                </div>
+                                <span asp-validation-for="TotalQuestions" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Quiz Date Field -->
+                            <div class="col-12">
+                                <label for="QuizDate" class="form-label fw-bold">Quiz Date</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-primary-light border-0">
+                                        <i class="fas fa-calendar-day text-primary"></i>
+                                    </span>
+                                    <input type="date"
+                                           class="form-control rounded-2 py-2"
+                                           asp-for="QuizDate"
+                                           value="@(Model?.QuizDate != null ? Model.QuizDate.Value.ToString("yyyy-MM-dd") : "")"
+                                           required>
+                                </div>
+                                <span asp-validation-for="QuizDate" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Temp userid Field - Removed from Edit form, Session UserID will be used -->
+                            <!-- Form Buttons Section -->
+                            <div class="col-12 mt-4 d-flex justify-content-between">
+                                <button type="submit"
+                                        class="btn btn-primary rounded-pill py-2 fw-bold" style="font-size: 0.875rem; width: 48%;">
+                                    <i class="fas fa-cloud-upload-alt me-2"></i>
+                                    @if (Model?.QuizID > 0)
+                                    {
+                                        <span>Update Quiz</span>
+                                    }
+                                    else
+                                    {
+                                        <span>Save & Continue</span>
+                                    }
+                                </button>
+
+                                <a href="../../Tables/QuizList" class="btn btn-outline-danger rounded-pill py-2 fw-bold" style="font-size: 0.875rem; width: 48%;">
+                                    <i class="bi bi-trash me-2"></i>
+                                    Cancel
+                                </a>
+                            </div>
+
+                        </form>
+                        <!-- End Quiz Creation Form -->
+
+                    </div>
+                </div>
+                <!-- End Create Quiz Form Section -->
+
+            </div>
+        </div>
+    </section>
+</main>
+
+<style>
+    .icon-shape {
+        width: 60px;
+        height: 60px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .bg-primary-light {
+        background-color: #e8f4ff;
+    }
+
+    .input-group-text {
+        transition: all 0.3s ease;
+    }
+
+    .form-control {
+        border: 1px solid #dee2e6;
+        transition: all 0.3s ease;
+    }
+
+        .form-control:focus {
+            box-shadow: 0 0 0 3px rgba(13,110,253,.25);
+            border-color: #86b7fe;
+        }
+
+    .rounded-2 {
+        border-radius: 0.75rem !important;
+    }
+
+    .btn-lg {
+        padding: 0.75rem 1.5rem;
+    }
+
+    .d-flex {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .gap-3 {
+        gap: 1rem;
+    }
+
+    .btn-primary,
+    .btn-outline-danger {
+        font-size: 0.875rem;
+    }
+
+        .btn-primary:hover,
+        .btn-outline-danger:hover {
+            opacity: 0.9;
+        }
+</style>
